@@ -1,7 +1,8 @@
-from fastapi import FastAPI, HTTPException
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, joinedload
+from sqlalchemy.ext.declarative import declarative_base
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, HTTPException
 import requests
 
 app = FastAPI()
@@ -102,3 +103,13 @@ def get_cart(cart_id: int):
 
     db.close()
     return result
+
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+)
