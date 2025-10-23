@@ -1,8 +1,7 @@
 from fastapi import FastAPI, HTTPException
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
-from datetime import datetime
+from sqlalchemy.orm import sessionmaker, relationship, joinedload
 import requests
 
 app = FastAPI()
@@ -19,6 +18,16 @@ class Cart(Base):
     userId = Column(Integer)
     date = Column(String)
     total_products = Column(Integer)
+    products = relationship("CartProduct", back_populates="cart", cascade="all, delete-orphan")
+
+class CartProduct(Base):
+    __tablename__ = "cart_products"
+    id = Column(Integer, primary_key=True, index=True)
+    cart_id = Column(Integer, ForeignKey("carts.id"), index=True)
+    productId = Column(Integer)
+    quantity = Column(Integer)
+
+    cart = relationship("Cart", back_populates="products")
 
 Base.metadata.create_all(bind=engine)
 
@@ -30,6 +39,7 @@ def import_carts():
     carts_data = response.json()
 
     db = SessionLocal()
+    db.query(CartProduct).delete()
     db.query(Cart).delete()  
     
     for cart in carts_data:
@@ -42,9 +52,17 @@ def import_carts():
         )
         db.add(new_cart)
 
+        for p in cart["products"]:
+            item = CartProduct(
+                cart_id=cart["id"],
+                productId=p["productId"],
+                quantity=p["quantity"]
+            )
+            db.add(item)
+
     db.commit()
     db.close()
-    return {"message": f"{len(carts_data)} carrinhos importados com sucesso!"}
+    return {"message": f"{len(carts_data)} carrinhos e seus produtos importados com sucesso!"}
 
 
 # --- Endpoints ---
@@ -59,8 +77,25 @@ def get_all_carts():
 @app.get("/carts/{cart_id}")
 def get_cart(cart_id: int):
     db = SessionLocal()
-    cart = db.query(Cart).filter(Cart.id == cart_id).first()
-    db.close()
+    cart = (
+        db.query(Cart)
+        .options(joinedload(Cart.products))
+        .filter(Cart.id == cart_id)
+        .first()
+    )
     if not cart:
+        db.close()
         raise HTTPException(status_code=404, detail="Carrinho não encontrado")
-    return cart
+
+    result = {
+        "id": cart.id,
+        "userId": cart.userId,
+        "date": cart.date,
+        "total_products": cart.total_products,
+        "products": [
+            {"productId": p.productId, "quantity": p.quantity} for p in cart.products
+        ],
+    }
+
+    db.close()
+    return result
