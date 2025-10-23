@@ -104,12 +104,7 @@ def get_cart(cart_id: int):
     db.close()
     return result
 
-origins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173"
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins="http://localhost:5173",
 )
