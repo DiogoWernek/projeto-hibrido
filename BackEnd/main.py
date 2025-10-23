@@ -64,7 +64,7 @@ def import_carts():
 
     db.commit()
     db.close()
-    return {"message": "carrinhos e produtos importados com sucesso!"}
+    return {"message": "carrinhos e produtos importados com sucesso!", "code": 200}
 
 
 # --- Endpoints ---
