@@ -12,6 +12,7 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
 
+# --- Modelando as Tabelas ---
 class Cart(Base):
     __tablename__ = "carts"
     id = Column(Integer, primary_key=True, index=True)
@@ -66,6 +67,8 @@ def import_carts():
 
 
 # --- Endpoints ---
+
+# Endpoint para puxar todos os carrinhos
 @app.get("/carts")
 def get_all_carts():
     db = SessionLocal()
@@ -73,7 +76,7 @@ def get_all_carts():
     db.close()
     return carts
 
-
+# Endpoint para puxar um carrinho específico e mostrar seus produtos
 @app.get("/carts/{cart_id}")
 def get_cart(cart_id: int):
     db = SessionLocal()
