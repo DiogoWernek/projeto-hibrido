@@ -46,12 +46,12 @@ Crie o ambiente virtual (venv) - solicitado:
 python -m venv .venv
 ```
 
-Ative o venv (CMD):
+Se estiver utilizando o CMD Ative o venv:
 ```bash
 .\.venv\Scripts\activate
 ```
 
-Ative o venv (PowerShell):
+Se estiver utilizando o PowerShell ative o venv:
 ```bash
 .\.venv\Scripts\Activate.ps1
 ```
@@ -66,14 +66,9 @@ Rode a API em modo desenvolvimento (porta 8000):
 python -m uvicorn main:app --reload
 ```
 
-Desative o venv (quando quiser encerrar):
-```bash
-deactivate
-```
-
 Observações:
 - O banco `database.db` é criado automaticamente no diretório `BackEnd` ao rodar a API.
-- O CORS está liberado para `http://localhost:5173` (frontend). Veja políticas abaixo para ajustes.
+- O CORS está liberado para `http://localhost:5173` (frontend).
 
 # FrontEnd - Instalação e Execução
 Entre na pasta do FrontEnd:
