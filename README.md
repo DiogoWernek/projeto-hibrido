@@ -4,6 +4,7 @@ Um projeto com API em FastAPI (SQLite) e frontend em React/Vite. O objetivo é i
 
 # Sumário
 - Requisitos
+- Clone do repositório
 - BackEnd (instalação e execução)
 - FrontEnd (instalação e execução)
 - Solução de Problemas (caso tenha problemas com execução de back ou front)
@@ -20,6 +21,19 @@ node -v
 ```bash
 npm -v
 ```
+
+# Clone do repositório
+Clonar o repositório:
+```bash
+git clone <URL_DO_REPOSITORIO>
+```
+
+Entrar na pasta do projeto:
+```bash
+cd projeto-hibrido
+```
+
+Dica: abra dois terminais — um para o BackEnd e outro para o FrontEnd.
 
 # BackEnd — Instalação e Execução
 Entre na pasta do BackEnd:
