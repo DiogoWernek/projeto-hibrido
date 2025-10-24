@@ -33,15 +33,15 @@ Entrar na pasta do projeto:
 cd projeto-hibrido
 ```
 
-Dica: abra dois terminais — um para o BackEnd e outro para o FrontEnd.
+Dica: abra dois terminais - um para o BackEnd e outro para o FrontEnd.
 
-# BackEnd — Instalação e Execução
+# BackEnd - Instalação e Execução
 Entre na pasta do BackEnd:
 ```bash
 cd BackEnd
 ```
 
-Crie o ambiente virtual (venv) — solicitado:
+Crie o ambiente virtual (venv) - solicitado:
 ```bash
 python -m venv .venv
 ```
@@ -75,7 +75,7 @@ Observações:
 - O banco `database.db` é criado automaticamente no diretório `BackEnd` ao rodar a API.
 - O CORS está liberado para `http://localhost:5173` (frontend). Veja políticas abaixo para ajustes.
 
-# FrontEnd — Instalação e Execução
+# FrontEnd - Instalação e Execução
 Entre na pasta do FrontEnd:
 ```bash
 cd FrontEnd
