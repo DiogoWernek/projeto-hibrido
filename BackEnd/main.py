@@ -104,6 +104,7 @@ def get_cart(cart_id: int):
     db.close()
     return result
 
+# --- Liberando CORS para requisição do FrontEnd ---
 app.add_middleware(
     CORSMiddleware,
     allow_origins="http://localhost:5173",
