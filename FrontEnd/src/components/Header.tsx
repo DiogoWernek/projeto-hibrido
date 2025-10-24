@@ -9,7 +9,7 @@ export const Header = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <img src={Logo} alt="logo automax" className="max-h-12" />
-            <Link to="/" className="text-xl font-bold text-gray-800 hover:text-blue-700 transition-colors">
+            <Link to="/" className="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
               Automax - Carrinhos
             </Link>
           </div>
