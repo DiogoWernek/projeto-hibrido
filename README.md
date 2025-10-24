@@ -25,7 +25,7 @@ npm -v
 # Clone do repositório
 Clonar o repositório:
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/DiogoWernek/projeto-hibrido.git
 ```
 
 Entrar na pasta do projeto:
